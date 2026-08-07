@@ -1,0 +1,18 @@
+{
+	"node": "n8n-nodes-base.laGrowthMachineTrigger",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Sales", "Marketing"],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://app.lagrowthmachine.com/settings/api"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://documenter.getpostman.com/view/32966764/2sBXqFM2Vv"
+			}
+		]
+	}
+}
