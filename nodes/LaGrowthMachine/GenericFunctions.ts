@@ -3,8 +3,8 @@ import {
 	IExecuteFunctions,
 	IHookFunctions,
 	IHttpRequestMethods,
+	IHttpRequestOptions,
 	ILoadOptionsFunctions,
-	IRequestOptions,
 	NodeApiError,
 } from 'n8n-workflow';
 
@@ -31,17 +31,29 @@ export async function lgmApiRequest(
 	const useForm = option.form === true;
 	delete option.form;
 
-	const options: IRequestOptions = {
+	const options: IHttpRequestOptions = {
 		method,
 		qs,
-		uri: `${LGM_BASE_URL}${endpoint}`,
+		url: `${LGM_BASE_URL}${endpoint}`,
 		json: true,
 		...option,
 	};
 
 	if (Object.keys(body).length !== 0) {
 		if (useForm) {
-			options.form = body;
+			// x-www-form-urlencoded. Arrays are repeated as `key=a&key=b`, matching
+			// what the LGM endpoints (leads/status, audiences import) expect.
+			const parts: string[] = [];
+			const encode = (value: unknown) => encodeURIComponent(String(value));
+			for (const [key, value] of Object.entries(body)) {
+				if (Array.isArray(value)) {
+					value.forEach((entry) => parts.push(`${encode(key)}=${encode(entry)}`));
+				} else if (value !== undefined && value !== null) {
+					parts.push(`${encode(key)}=${encode(value)}`);
+				}
+			}
+			options.headers = { 'content-type': 'application/x-www-form-urlencoded' };
+			options.body = parts.join('&');
 		} else {
 			options.body = body;
 		}
@@ -52,7 +64,7 @@ export async function lgmApiRequest(
 	}
 
 	try {
-		return await this.helpers.requestWithAuthentication.call(this, 'laGrowthMachineApi', options);
+		return await this.helpers.httpRequestWithAuthentication.call(this, 'laGrowthMachineApi', options);
 	} catch (error) {
 		throw new NodeApiError(this.getNode(), error as JsonObject);
 	}

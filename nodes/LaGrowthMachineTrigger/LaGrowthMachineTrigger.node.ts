@@ -5,6 +5,7 @@ import {
 	INodeTypeDescription,
 	IWebhookFunctions,
 	IWebhookResponseData,
+	NodeConnectionTypes,
 } from 'n8n-workflow';
 
 import { lgmApiRequest } from '../LaGrowthMachine/GenericFunctions';
@@ -18,11 +19,12 @@ export class LaGrowthMachineTrigger implements INodeType {
 		version: 1,
 		subtitle: '=Inbox events',
 		description: 'Starts a workflow when a La Growth Machine inbox message is sent or received',
+		usableAsTool: true,
 		defaults: {
 			name: 'La Growth Machine Trigger',
 		},
 		inputs: [],
-		outputs: ['main'],
+		outputs: [NodeConnectionTypes.Main],
 		credentials: [
 			{
 				name: 'laGrowthMachineApi',
@@ -94,11 +96,9 @@ export class LaGrowthMachineTrigger implements INodeType {
 			async delete(this: IHookFunctions): Promise<boolean> {
 				const webhookData = this.getWorkflowStaticData('node');
 				if (webhookData.webhookId === undefined) return true;
-				try {
-					await lgmApiRequest.call(this, 'DELETE', `/inboxWebhooks/${webhookData.webhookId}`);
-				} catch (error) {
-					return false;
-				}
+				// Let a failed delete surface (lgmApiRequest throws a NodeApiError)
+				// rather than swallowing it silently.
+				await lgmApiRequest.call(this, 'DELETE', `/inboxWebhooks/${webhookData.webhookId}`);
 				delete webhookData.webhookId;
 				return true;
 			},

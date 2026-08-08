@@ -1,5 +1,6 @@
 import {
 	IAuthenticateGeneric,
+	Icon,
 	ICredentialTestRequest,
 	ICredentialType,
 	INodeProperties,
@@ -9,6 +10,8 @@ export class LaGrowthMachineApi implements ICredentialType {
 	name = 'laGrowthMachineApi';
 
 	displayName = 'La Growth Machine API';
+
+	icon: Icon = 'file:lagrowthmachine-logo.svg';
 
 	documentationUrl = 'https://documenter.getpostman.com/view/32966764/2sBXqFM2Vv';
 

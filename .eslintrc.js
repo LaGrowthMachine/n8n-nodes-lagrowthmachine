@@ -48,6 +48,10 @@ module.exports = {
 				'n8n-nodes-base/node-execute-block-missing-continue-on-fail': 'off',
 				'n8n-nodes-base/node-resource-description-filename-against-convention': 'off',
 				'n8n-nodes-base/node-param-fixed-collection-type-unsorted-items': 'off',
+				// We use NodeConnectionTypes.Main (required by @n8n/community-nodes
+				// verification), which conflicts with these base rules wanting ['main'].
+				'n8n-nodes-base/node-class-description-inputs-wrong-regular-node': 'off',
+				'n8n-nodes-base/node-class-description-outputs-wrong': 'off',
 			},
 		},
 	],

@@ -4,6 +4,9 @@ import {
 	INodeExecutionData,
 	INodeType,
 	INodeTypeDescription,
+	JsonObject,
+	NodeApiError,
+	NodeConnectionTypes,
 } from 'n8n-workflow';
 
 import {
@@ -32,11 +35,12 @@ export class LaGrowthMachine implements INodeType {
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
 		description: 'Manage leads, audiences, campaigns, conversations and more in La Growth Machine',
+		usableAsTool: true,
 		defaults: {
 			name: 'La Growth Machine',
 		},
-		inputs: ['main'],
-		outputs: ['main'],
+		inputs: [NodeConnectionTypes.Main],
+		outputs: [NodeConnectionTypes.Main],
 		credentials: [
 			{
 				name: 'laGrowthMachineApi',
@@ -121,7 +125,7 @@ export class LaGrowthMachine implements INodeType {
 					returnData.push({ json: { error: (error as Error).message }, pairedItem: { item: i } });
 					continue;
 				}
-				throw error;
+				throw new NodeApiError(this.getNode(), error as JsonObject, { itemIndex: i });
 			}
 		}
 
