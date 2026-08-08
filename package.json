@@ -22,7 +22,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lagrowthmachine/n8n-nodes-lagrowthmachine.git"
+    "url": "git+https://github.com/LaGrowthMachine/n8n-nodes-lagrowthmachine.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LaGrowthMachine/n8n-nodes-lagrowthmachine/issues"
   },
   "engines": {
     "node": ">=18.10",

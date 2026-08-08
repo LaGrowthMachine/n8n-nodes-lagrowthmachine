@@ -1,4 +1,6 @@
-# n8n-nodes-lagrowthmachine
+# @lagrowthmachine/n8n-nodes-lagrowthmachine
+
+> ✅ **Official node**, built and maintained by [La Growth Machine](https://lagrowthmachine.com). Published under the `@lagrowthmachine` scope. (An unofficial `n8n-nodes-lagrowthmachine` package also exists on npm — this scoped package is the official one.)
 
 This is an n8n community node. It lets you use **La Growth Machine (LGM)** in your n8n workflows.
 
