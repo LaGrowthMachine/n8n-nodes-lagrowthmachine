@@ -45,4 +45,19 @@ export const campaignFields: INodeProperties[] = [
 		displayOptions: { show: { resource: ['campaign'], operation: ['getAll'], returnAll: [false] } },
 		description: 'Max number of results to return',
 	},
+	{
+		displayName: 'Status',
+		name: 'status',
+		type: 'options',
+		default: '',
+		displayOptions: { show: { resource: ['campaign'], operation: ['getAll'] } },
+		options: [
+			{ name: 'Any', value: '' },
+			{ name: 'Canceled', value: 'CANCELED' },
+			{ name: 'Paused', value: 'PAUSED' },
+			{ name: 'Ready', value: 'READY' },
+			{ name: 'Running', value: 'RUNNING' },
+		],
+		description: 'Filter campaigns by their status',
+	},
 ];

@@ -292,11 +292,16 @@ async function handleCampaign(
 ): Promise<IDataObject | IDataObject[]> {
 	if (operation === 'getAll') {
 		const returnAll = this.getNodeParameter('returnAll', i) as boolean;
+		const status = this.getNodeParameter('status', i, '') as string;
+		const qs: IDataObject = {};
+		if (status) qs.status = status;
 		if (returnAll) {
-			return lgmApiRequestAllItemsOffset.call(this, 'GET', '/campaigns', 'campaigns', {}, 25);
+			return lgmApiRequestAllItemsOffset.call(this, 'GET', '/campaigns', 'campaigns', qs, 25);
 		}
-		const limit = this.getNodeParameter('limit', i) as number;
-		const responseData = await lgmApiRequest.call(this, 'GET', '/campaigns', {}, { limit, skip: 0 });
+		// The campaigns endpoint caps limit at 25 per page (higher values return empty).
+		qs.limit = Math.min(this.getNodeParameter('limit', i) as number, 25);
+		qs.skip = 0;
+		const responseData = await lgmApiRequest.call(this, 'GET', '/campaigns', {}, qs);
 		return (responseData.campaigns as IDataObject[]) ?? responseData;
 	}
 
