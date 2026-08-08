@@ -54,27 +54,62 @@ The credential authenticates every request with an `Authorization: Bearer` heade
 
 ### Campaign
 
-Get Many · Get · Get Stats · Get Messages · Get Lead Stats (with *Return All* cursor pagination).
+| Operation | What it does |
+|---|---|
+| Get Many | Return campaigns, optionally filtered by status (Running / Paused / Ready / Canceled) |
+| Get | Return a single campaign by ID |
+| Get Stats | Return aggregated engagement stats for a campaign |
+| Get Lead Stats | Return per-lead engagement stats (with *Return All* cursor pagination) |
+| Get Messages | Return the message templates of a campaign sequence |
 
 ### Conversation
 
-Get Many (search with rich filters) · Get Messages · Archive · Unarchive · Snooze · Unsnooze · Edit Note.
+| Operation | What it does |
+|---|---|
+| Get Many | Search and paginate inbox conversations with rich filters (status, channel, dates, replied, and more) |
+| Get Messages | Return all messages of a conversation |
+| Archive | Move a conversation out of the active inbox |
+| Unarchive | Bring an archived conversation back |
+| Snooze | Hide a conversation until a chosen date |
+| Unsnooze | Wake a snoozed conversation up immediately |
+| Edit Note | Set or append the note attached to a conversation |
 
 ### Message
 
-Send LinkedIn Message (text or voice) · Send Email — via a connected identity.
+| Operation | What it does |
+|---|---|
+| Send LinkedIn Message | Send a text or voice LinkedIn message via a connected identity |
+| Send Email | Send an email via a connected identity (with reply-in-thread, CC/BCC) |
 
 ### CRM
 
-Search — look up a contact in your connected CRM (HubSpot, Pipedrive, Salesforce…).
+| Operation | What it does |
+|---|---|
+| Search | Look up a contact in your connected CRM (HubSpot, Pipedrive, Salesforce…) |
 
 ### Website Visitor
 
-Push — forward an identified visitor (RB2B / Warmly / Vector native payload) into an audience.
+| Operation | What it does |
+|---|---|
+| Push | Forward an identified visitor (RB2B / Warmly / Vector native payload) into an audience |
 
-### Identity · Member · Credit
+### Identity
 
-Get connected identities, workspace members, and the account credit balance — needed to drive the Message and enrichment operations.
+| Operation | What it does |
+|---|---|
+| Get Many | Return your connected identities (needed for Message and LinkedIn-import operations) |
+
+### Member
+
+| Operation | What it does |
+|---|---|
+| Get Many | Return your workspace members (needed as `memberId` when sending LinkedIn messages) |
+
+### Credit
+
+| Operation | What it does |
+|---|---|
+| Get | Return the account's credit balance |
 
 ## Trigger
 
@@ -88,7 +123,7 @@ A few common patterns:
 - **Enrich then act** — *Lead → Enrich* (polling) → wait → *Lead → Get Enrich Result* to fetch a pro email before pushing to your CRM.
 - **Report on an audience** — *Audience → Get Leads* with *Return All* enabled to pull every lead into a spreadsheet or warehouse.
 
-> Enrichment consumes LGM credits. *Email* costs 5 credits, *LinkedIn* 1, *Full* 5. LinkedIn and Full enrichment require an existing Lead ID.
+> Enrichment consumes LGM credits. *Email* costs 5 credits, *LinkedIn* 1, *Full* 5. Email enrichment works from a Lead ID or from a first and last name plus a company; LinkedIn and Full enrichment require a Lead ID.
 
 ## Resources
 
