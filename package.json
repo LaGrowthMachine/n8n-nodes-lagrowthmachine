@@ -1,6 +1,6 @@
 {
   "name": "@lagrowthmachine/n8n-nodes-lagrowthmachine",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "n8n community node for La Growth Machine (LGM) — multichannel sales outreach. Manage leads, audiences, campaigns, conversations, messages, CRM and inbox webhooks.",
   "keywords": [
     "n8n-community-node-package",
