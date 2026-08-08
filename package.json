@@ -1,6 +1,6 @@
 {
-  "name": "n8n-nodes-lagrowthmachine",
-  "version": "0.2.0",
+  "name": "@lagrowthmachine/n8n-nodes-lagrowthmachine",
+  "version": "1.0.0",
   "description": "n8n community node for La Growth Machine (LGM) — multichannel sales outreach. Manage leads, audiences, campaigns, conversations, messages, CRM and inbox webhooks.",
   "keywords": [
     "n8n-community-node-package",
@@ -13,6 +13,9 @@
     "lead-generation"
   ],
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "homepage": "https://lagrowthmachine.com",
   "author": {
     "name": "La Growth Machine"
@@ -56,7 +59,7 @@
     "n8n-workflow": "*",
     "prettier": "^3.3.2",
     "rimraf": "^5.0.7",
-    "typescript": "^5.5.3"
+    "typescript": "~5.5.4"
   },
   "peerDependencies": {
     "n8n-workflow": "*"

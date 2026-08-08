@@ -11,10 +11,19 @@ npm run lint  # 0 errors (n8n community ruleset)
 npm run build # compiles to dist/ + copies icons & codex
 ```
 
-## 1. Set the real repository URL
+> **Why the scoped name?** The unscoped `n8n-nodes-lagrowthmachine` is already taken
+> on npm by a third party (`elevate_agency`, v1.0.0, Nov 2025). This official package
+> is published under the LGM-owned scope **`@lagrowthmachine/n8n-nodes-lagrowthmachine`**.
 
-`package.json` currently points to a placeholder GitHub URL
-(`lagrowthmachine/n8n-nodes-lagrowthmachine`). Create that repo (or change the URL)
+## 1. Create the npm org (one-time, free)
+
+The `@lagrowthmachine` scope must exist and be owned by your npm account. Create a
+free org at <https://www.npmjs.com/org/create> (name: `lagrowthmachine`, free plan =
+unlimited public packages). Add any teammates who should be able to publish.
+
+## 2. Set the real repository URL
+
+`package.json` points to a placeholder GitHub URL. Create the repo (or change the URL)
 and push:
 
 ```bash
@@ -22,24 +31,25 @@ git remote add origin git@github.com:<org>/n8n-nodes-lagrowthmachine.git
 git push -u origin main
 ```
 
-## 2. Publish to npm
+## 3. Publish to npm
 
 ```bash
 npm login
-npm publish --access public
+npm publish   # scope access is set to public via publishConfig
 ```
 
 `prepublishOnly` runs the build + strict lint automatically before the package is
-uploaded, so a broken build can't be published.
+uploaded, so a broken build can't be published. `publishConfig.access = public` makes
+the scoped package public (otherwise npm would try to publish it as private).
 
 > Tip: to preview the exact tarball without publishing: `npm pack` (inspect the `.tgz`).
 
-## 3. Install on n8n
+## 4. Install on n8n
 
-- **Self-hosted**: Settings → Community Nodes → Install → `n8n-nodes-lagrowthmachine`.
-- **n8n Cloud**: only **verified** community nodes install on Cloud — do step 4 first.
+- **Self-hosted**: Settings → Community Nodes → Install → `@lagrowthmachine/n8n-nodes-lagrowthmachine`.
+- **n8n Cloud**: only **verified** community nodes install on Cloud — do step 5 first.
 
-## 4. Submit for n8n verification
+## 5. Submit for n8n verification
 
 Verified nodes appear in the in-app node search and are installable on n8n Cloud.
 Follow n8n's submission process: <https://docs.n8n.io/integrations/community-nodes/build-community-nodes/#verify-your-node>
