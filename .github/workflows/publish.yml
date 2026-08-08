@@ -1,13 +1,19 @@
 name: Publish to npm
 
-# Publishes the package to npm WITH provenance (required by n8n's community-node
-# verification for submissions from May 1st 2026 onward).
+# Publishes to npm using npm Trusted Publishing (OIDC) WITH provenance.
+# No npm token needed: authentication happens through GitHub's OIDC identity,
+# which you authorise once on npm as a "trusted publisher" for this repo.
 #
-# Setup (one-time):
-#   1. Create an npm Automation or Granular access token with publish rights on
-#      @lagrowthmachine, and add it to this repo as the secret `NPM_TOKEN`.
-#   2. To release: bump the version (npm version patch|minor|major), push the tag,
-#      then create a GitHub Release for that tag — or run this workflow manually.
+# One-time setup on npm:
+#   npmjs.com → the package → Settings → Trusted Publisher → GitHub Actions:
+#     - Organization/owner: LaGrowthMachine
+#     - Repository:         n8n-nodes-lagrowthmachine
+#     - Workflow filename:  publish.yml
+#     - Environment:        (leave empty)
+#
+# To release:
+#   git pull && npm version patch && git push --follow-tags
+#   then create a GitHub Release for the new tag (or run this workflow manually).
 
 on:
   release:
@@ -19,14 +25,14 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write # required for npm provenance
+      id-token: write # required for OIDC trusted publishing + provenance
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
+      # Trusted publishing needs a recent npm (>= 11.5.1); node 20 ships an older one.
+      - run: npm install -g npm@latest
       - run: npm ci
-      - run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: npm publish --provenance

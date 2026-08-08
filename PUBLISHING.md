@@ -58,9 +58,10 @@ Submit at the **n8n Creator Portal: <https://creators.n8n.io/nodes>**.
 > ⚠️ **Provenance required (from 1 May 2026).** Nodes submitted for verification must
 > be **published to npm via GitHub Actions with a provenance statement**. A manual
 > `npm publish` from a laptop does NOT qualify. Use the included
-> `.github/workflows/publish.yml`:
-> 1. Add an npm Automation/Granular token as the repo secret `NPM_TOKEN`.
-> 2. `npm version patch` → push the tag → create a GitHub Release (the Action publishes with `--provenance`).
+> `.github/workflows/publish.yml`, which uses **npm Trusted Publishing (OIDC)** — no
+> token to manage:
+> 1. On npm: the package → Settings → **Trusted Publisher** → GitHub Actions → owner `LaGrowthMachine`, repo `n8n-nodes-lagrowthmachine`, workflow `publish.yml`.
+> 2. `git pull && npm version patch && git push --follow-tags` → create a GitHub Release (the Action publishes with provenance over OIDC).
 > 3. Then submit the (provenance-published) version at creators.n8n.io/nodes.
 >
 > n8n also reserves the right to reject nodes that compete with its paid/enterprise features.
