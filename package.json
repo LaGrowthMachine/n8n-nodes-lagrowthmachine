@@ -18,7 +18,8 @@
   },
   "homepage": "https://lagrowthmachine.com",
   "author": {
-    "name": "La Growth Machine"
+    "name": "La Growth Machine",
+    "email": "brice@lagrowthmachine.com"
   },
   "repository": {
     "type": "git",
