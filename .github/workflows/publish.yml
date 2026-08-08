@@ -1,0 +1,32 @@
+name: Publish to npm
+
+# Publishes the package to npm WITH provenance (required by n8n's community-node
+# verification for submissions from May 1st 2026 onward).
+#
+# Setup (one-time):
+#   1. Create an npm Automation or Granular access token with publish rights on
+#      @lagrowthmachine, and add it to this repo as the secret `NPM_TOKEN`.
+#   2. To release: bump the version (npm version patch|minor|major), push the tag,
+#      then create a GitHub Release for that tag — or run this workflow manually.
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # required for npm provenance
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm ci
+      - run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
