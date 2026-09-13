@@ -11,7 +11,7 @@ export class LaGrowthMachineApi implements ICredentialType {
 
 	displayName = 'La Growth Machine API';
 
-	icon: Icon = 'file:lagrowthmachine-logo.svg';
+	icon: Icon = { light: 'file:lagrowthmachine-logo-light.svg', dark: 'file:lagrowthmachine-logo.svg' };
 
 	documentationUrl = 'https://documenter.getpostman.com/view/32966764/2sBXqFM2Vv';
 

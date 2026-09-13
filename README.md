@@ -14,7 +14,7 @@ This is an n8n community node. It lets you use **La Growth Machine (LGM)** in yo
 
 Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation.
 
-For a self-hosted instance: **Settings → Community Nodes → Install** and enter `n8n-nodes-lagrowthmachine`.
+For a self-hosted instance: **Settings → Community Nodes → Install** and enter `@lagrowthmachine/n8n-nodes-lagrowthmachine`.
 
 ## Credentials
 

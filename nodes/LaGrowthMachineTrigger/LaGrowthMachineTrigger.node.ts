@@ -14,12 +14,11 @@ export class LaGrowthMachineTrigger implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'La Growth Machine Trigger',
 		name: 'laGrowthMachineTrigger',
-		icon: 'file:lagrowthmachine-logo.svg',
+		icon: { light: 'file:lagrowthmachine-logo-light.svg', dark: 'file:lagrowthmachine-logo.svg' },
 		group: ['trigger'],
 		version: 1,
 		subtitle: '=Inbox events',
 		description: 'Starts a workflow when a La Growth Machine inbox message is sent or received',
-		usableAsTool: true,
 		defaults: {
 			name: 'La Growth Machine Trigger',
 		},

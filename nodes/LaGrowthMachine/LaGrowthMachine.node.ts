@@ -30,7 +30,7 @@ export class LaGrowthMachine implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'La Growth Machine',
 		name: 'laGrowthMachine',
-		icon: 'file:lagrowthmachine-logo.svg',
+		icon: { light: 'file:lagrowthmachine-logo-light.svg', dark: 'file:lagrowthmachine-logo.svg' },
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
