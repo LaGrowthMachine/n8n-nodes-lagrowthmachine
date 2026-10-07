@@ -13,7 +13,7 @@ export class LaGrowthMachineApi implements ICredentialType {
 
 	icon: Icon = { light: 'file:lagrowthmachine-logo-light.svg', dark: 'file:lagrowthmachine-logo.svg' };
 
-	documentationUrl = 'https://documenter.getpostman.com/view/32966764/2sBXqFM2Vv';
+	documentationUrl = 'https://lagrowthmachine.com/api';
 
 	properties: INodeProperties[] = [
 		{
