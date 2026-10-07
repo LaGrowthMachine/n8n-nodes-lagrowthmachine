@@ -128,7 +128,7 @@ A few common patterns:
 ## Resources
 
 - [n8n community nodes documentation](https://docs.n8n.io/integrations/community-nodes/)
-- [La Growth Machine API documentation](https://documenter.getpostman.com/view/32966764/2sBXqFM2Vv)
+- [La Growth Machine API documentation](https://lagrowthmachine.com/api)
 
 ## Version history
 
