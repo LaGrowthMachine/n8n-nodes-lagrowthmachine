@@ -59,6 +59,8 @@ export const conversationFields: INodeProperties[] = [
 		displayOptions: { show: { resource: ['conversation'], operation: ['search'] } },
 		options: [
 			{ displayName: 'Audience IDs', name: 'audienceIds', type: 'string', default: '', description: 'Comma-separated audience IDs' },
+			{ displayName: 'Call Completed At From', name: 'callCompletedAtFrom', type: 'number', default: 0, description: 'Lower bound on the call task completion date (epoch ms)' },
+			{ displayName: 'Call Completed At To', name: 'callCompletedAtTo', type: 'number', default: 0, description: 'Upper bound on the call task completion date (epoch ms)' },
 			{ displayName: 'Campaign IDs', name: 'campaignIds', type: 'string', default: '', description: 'Comma-separated campaign IDs' },
 			{ displayName: 'Favourite', name: 'favourite', type: 'boolean', default: false },
 			{ displayName: 'Identity IDs', name: 'identityIds', type: 'string', default: '', description: 'Comma-separated identity IDs' },
@@ -68,6 +70,7 @@ export const conversationFields: INodeProperties[] = [
 			{ displayName: 'Last Message Type', name: 'lastMessageType', type: 'string', default: '', description: 'E.g. LINKEDIN, EMAIL, LGM.' },
 			{ displayName: 'Lead IDs', name: 'leadIds', type: 'string', default: '', description: 'Comma-separated lead IDs' },
 			{ displayName: 'Lead Replied', name: 'leadReplied', type: 'boolean', default: false },
+			{ displayName: 'Perseverance', name: 'perseverance', type: 'options', default: 'TO_PERSEVERE', options: [{ name: 'Persevered', value: 'PERSEVERED', description: 'Conversations already followed up' }, { name: 'To Persevere', value: 'TO_PERSEVERE', description: 'Open or curious replies still to follow up' }], description: 'Reply manager follow-up filter' },
 			{ displayName: 'Query', name: 'q', type: 'string', default: '' },
 			{ displayName: 'Read', name: 'read', type: 'boolean', default: false },
 			{ displayName: 'Sort Direction', name: 'sortDirection', type: 'options', default: -1, options: [{ name: 'Descending', value: -1 }, { name: 'Ascending', value: 1 }] },

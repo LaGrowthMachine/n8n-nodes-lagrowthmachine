@@ -1,21 +1,7 @@
 import { INodeProperties } from 'n8n-workflow';
 
-// Identity, Member and Credit each expose a single read operation with no
-// parameters. They are grouped here to keep the node file tidy.
-
-export const identityOperations: INodeProperties[] = [
-	{
-		displayName: 'Operation',
-		name: 'operation',
-		type: 'options',
-		noDataExpression: true,
-		displayOptions: { show: { resource: ['identity'] } },
-		options: [
-			{ name: 'Get Many', value: 'getAll', action: 'Get many identities', description: 'Get many connected identities' },
-		],
-		default: 'getAll',
-	},
-];
+// Member and Credit expose simple read operations with no parameters.
+// They are grouped here to keep the node file tidy.
 
 export const memberOperations: INodeProperties[] = [
 	{
@@ -26,6 +12,7 @@ export const memberOperations: INodeProperties[] = [
 		displayOptions: { show: { resource: ['member'] } },
 		options: [
 			{ name: 'Get Many', value: 'getAll', action: 'Get many members', description: 'Get many workspace members' },
+			{ name: 'Get Me', value: 'getMe', action: 'Get the authenticated member', description: 'Get the member (ID and email) behind the API key used for the call' },
 		],
 		default: 'getAll',
 	},

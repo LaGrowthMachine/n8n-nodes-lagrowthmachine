@@ -13,7 +13,7 @@ export class LaGrowthMachineApi implements ICredentialType {
 
 	icon: Icon = { light: 'file:lagrowthmachine-logo-light.svg', dark: 'file:lagrowthmachine-logo.svg' };
 
-	documentationUrl = 'https://lagrowthmachine.com/api';
+	documentationUrl = 'https://developers.lagrowthmachine.com/';
 
 	properties: INodeProperties[] = [
 		{
@@ -25,6 +25,14 @@ export class LaGrowthMachineApi implements ICredentialType {
 			required: true,
 			description:
 				'Your La Growth Machine API key. Generate it from Settings → API at https://app.lagrowthmachine.com/settings/api (you must be logged in).',
+		},
+		{
+			displayName: 'Workspace ID',
+			name: 'workspaceId',
+			type: 'string',
+			default: '',
+			description:
+				'Optional, multi-workspace accounts only: ID of the workspace to act in (sent as the X-LGM-Workspace header on every request). Leave empty to act in the default workspace of the API key. List workspace IDs with the Workspace → Get Many operation.',
 		},
 	];
 

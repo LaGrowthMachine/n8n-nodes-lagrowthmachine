@@ -39,6 +39,12 @@ export const leadOperations: INodeProperties[] = [
 				description: 'Retrieve the activity logs of a lead',
 			},
 			{
+				name: 'Remove From Audience',
+				value: 'removeFromAudience',
+				action: 'Remove a lead from audiences',
+				description: 'Remove a lead from one or more audiences (or from all of them)',
+			},
+			{
 				name: 'Search',
 				value: 'search',
 				action: 'Search leads',
@@ -136,6 +142,39 @@ export const leadFields: INodeProperties[] = [
 	},
 
 	// ----------------------------------
+	//       lead:removeFromAudience
+	// ----------------------------------
+	{
+		displayName: 'Audience',
+		name: 'removeAudience',
+		type: 'string',
+		default: 'all',
+		required: true,
+		displayOptions: { show: { resource: ['lead'], operation: ['removeFromAudience'] } },
+		description: '"all", an audience name or ID, or a comma-separated list of names or IDs. Unknown names in a list are ignored.',
+	},
+	{
+		displayName: 'Identifiers',
+		name: 'identifiers',
+		type: 'collection',
+		placeholder: 'Add Identifier',
+		default: {},
+		displayOptions: { show: { resource: ['lead'], operation: ['removeFromAudience'] } },
+		description: 'At least one identifier is required: an email, LinkedIn URL, Twitter, CRM ID, OR First + Last name (+ company). Lead ID is not accepted on this operation.',
+		options: [
+			{ displayName: 'Company Name', name: 'companyName', type: 'string', default: '' },
+			{ displayName: 'Company URL', name: 'companyUrl', type: 'string', default: '' },
+			{ displayName: 'CRM ID', name: 'crm_id', type: 'string', default: '' },
+			{ displayName: 'First Name', name: 'firstname', type: 'string', default: '' },
+			{ displayName: 'Last Name', name: 'lastname', type: 'string', default: '' },
+			{ displayName: 'LinkedIn URL', name: 'linkedinUrl', type: 'string', default: '' },
+			{ displayName: 'Perso Email', name: 'persoEmail', type: 'string', default: '', placeholder: 'name@gmail.com' },
+			{ displayName: 'Pro Email', name: 'proEmail', type: 'string', default: '', placeholder: 'name@company.com' },
+			{ displayName: 'Twitter', name: 'twitter', type: 'string', default: '' },
+		],
+	},
+
+	// ----------------------------------
 	//              lead:search
 	// ----------------------------------
 	{
@@ -156,6 +195,7 @@ export const leadFields: INodeProperties[] = [
 			{ displayName: 'Last Name', name: 'lastname', type: 'string', default: '' },
 			{ displayName: 'Lead ID', name: 'leadId', type: 'string', default: '' },
 			{ displayName: 'LinkedIn ID', name: 'linkedinId', type: 'string', default: '' },
+			{ displayName: 'LinkedIn Long Public ID', name: 'linkedinLongPublicId', type: 'string', default: '' },
 			{ displayName: 'LinkedIn Public ID', name: 'linkedinPublicId', type: 'string', default: '' },
 			{ displayName: 'LinkedIn URL', name: 'linkedinUrl', type: 'string', default: '' },
 			{ displayName: 'Location', name: 'location', type: 'string', default: '' },
@@ -197,6 +237,34 @@ export const leadFields: INodeProperties[] = [
 		displayOptions: { show: { resource: ['lead'], operation: ['updateStatus'] } },
 		description: 'At least one identifier is required to target the lead',
 		options: leadIdentifierFields,
+	},
+	{
+		displayName: 'Options',
+		name: 'statusOptions',
+		type: 'collection',
+		placeholder: 'Add Option',
+		default: {},
+		displayOptions: { show: { resource: ['lead'], operation: ['updateStatus'] } },
+		options: [
+			{
+				displayName: 'From',
+				name: 'from',
+				type: 'options',
+				default: 'member',
+				options: [
+					{ name: 'Lead', value: 'lead' },
+					{ name: 'Member', value: 'member' },
+				],
+				description: 'Records who asked for the change',
+			},
+			{
+				displayName: 'Member Email',
+				name: 'memberEmail',
+				type: 'string',
+				default: '',
+				description: 'Member on whose behalf a SUBSCRIBED change is made (default: the workspace owner)',
+			},
+		],
 	},
 
 	// ----------------------------------

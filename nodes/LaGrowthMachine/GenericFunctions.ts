@@ -39,6 +39,15 @@ export async function lgmApiRequest(
 		...option,
 	};
 
+	// Multi-workspace accounts: the credential may carry a workspace ID, sent as
+	// the X-LGM-Workspace header so the call acts in that workspace instead of
+	// the API key's default one.
+	const credentials = await this.getCredentials('laGrowthMachineApi');
+	const workspaceId = typeof credentials.workspaceId === 'string' ? credentials.workspaceId.trim() : '';
+	if (workspaceId) {
+		options.headers = { ...(options.headers as IDataObject), 'X-LGM-Workspace': workspaceId };
+	}
+
 	if (Object.keys(body).length !== 0) {
 		if (useForm) {
 			// x-www-form-urlencoded. Arrays are repeated as `key=a&key=b`, matching
@@ -52,7 +61,7 @@ export async function lgmApiRequest(
 					parts.push(`${encode(key)}=${encode(value)}`);
 				}
 			}
-			options.headers = { 'content-type': 'application/x-www-form-urlencoded' };
+			options.headers = { ...(options.headers as IDataObject), 'content-type': 'application/x-www-form-urlencoded' };
 			options.body = parts.join('&');
 		} else {
 			options.body = body;
